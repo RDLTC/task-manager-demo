@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserDto {
+    private Long id;
     @Email
     private String email;
     @NotBlank
     private String password;
     @NotBlank
     private String userName;
+    private String role;
     private List<TaskDto> tasks;
 }

@@ -6,7 +6,7 @@
     </head>
 
     <body>
-        <form th:object="${task}" th:action="@{/tasks/{username}/addTask(username=${username})}" method="post">
+        <form th:object="${task}" th:action="@{/tasks/addTask}" method="post">
             <div>
                 <label for="title">Title:</label>
                 <input id="title" th:field="*{title}" type="text"/>

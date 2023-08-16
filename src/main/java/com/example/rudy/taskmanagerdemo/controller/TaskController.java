@@ -1,7 +1,7 @@
 package com.example.rudy.taskmanagerdemo.controller;
 
-import com.example.rudy.taskmanagerdemo.domain.Task;
-import com.example.rudy.taskmanagerdemo.domain.User;
+import com.example.rudy.taskmanagerdemo.dto.TaskDto;
+import com.example.rudy.taskmanagerdemo.dto.UserDto;
 import com.example.rudy.taskmanagerdemo.service.TaskService;
 import com.example.rudy.taskmanagerdemo.service.UserService;
 import jakarta.validation.Valid;
@@ -31,23 +31,23 @@ public class TaskController {
     
     @GetMapping("/{username}")
     public String userTasksPage(@PathVariable String username, Model model){
-        User user = userService.findByUsername(username);
+        UserDto user = userService.findByUsername(username);
         model.addAttribute("tasks", user.getTasks());
         return "tasksIndex";
     }
     
     @GetMapping("/{username}/addTask")
     public String userAddTaskPage(Model model){
-        model.addAttribute("task", new Task());
+        model.addAttribute("task", new TaskDto());
         return "addTask";
     }
     
-    @PostMapping("/{username}/addTask")
-    public String addTask(@PathVariable String username, @ModelAttribute("task") @Valid Task task, Errors errors){
+    @PostMapping("/addTask")
+    public String addTask(Authentication auth, @ModelAttribute("task") @Valid TaskDto task, Errors errors) throws Exception{
         if(errors.hasErrors()){
             return "addTask";
         }
-        taskService.addTask(task, username);
+        taskService.addTask(task, auth.getName());
         return "redirect:/tasks";
     }
 }

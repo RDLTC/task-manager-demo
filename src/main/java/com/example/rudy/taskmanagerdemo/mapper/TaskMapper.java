@@ -2,13 +2,14 @@ package com.example.rudy.taskmanagerdemo.mapper;
 
 import com.example.rudy.taskmanagerdemo.domain.Task;
 import com.example.rudy.taskmanagerdemo.dto.TaskDto;
-import lombok.Builder;
+import org.springframework.stereotype.Component;
 
-@Builder
+@Component
 public class TaskMapper {
     
     public TaskDto taskToDto(Task task){
         TaskDto taskDto = TaskDto.builder()
+                                 .id(task.getId())
                                  .title(task.getTitle())
                                  .description(task.getDescription())
                                  .status(task.getStatus())
@@ -20,6 +21,7 @@ public class TaskMapper {
     
     public Task dtoToTask(TaskDto taskDto){
         Task task = Task.builder()
+                        .id(taskDto.getId())
                         .title(taskDto.getTitle())
                         .description(taskDto.getDescription())
                         .status(taskDto.getStatus())
