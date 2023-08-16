@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlsn:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Sign In</title>
+    </head>
+
+    <body>
+        <form th:action="@{/user/register}" method="post">  
+            <div th:if="${param.error}">
+                <span>Invalid data input, verify.</span>
+            </div>
+            <h1><label>Email: </label><input type="text" name="email" placeholder="Email"/><br></h1>
+            <h1><label>Username: </label><input type="text" name="userName" placeholder="Username"/><br></h1>
+            <h1><label>Password: </label><input type="text" name="password" placeholder="Password"/><br></h1>
+            <button type="submit">Sign In</button>
+        </form>
+    </body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Add Task</title>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <form th:object="${task}" th:action="@{/tasks/{username}/addTask(username=${username})}" method="post">
+            <div>
+                <label for="title">Title:</label>
+                <input id="title" th:field="*{title}" type="text"/>
+                <div style="color: red" th:if="${#fields.hasErrors('title')}">Invalid Title</div>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <input id="description" th:field="*{description}" type="text"/>
+                <div style="color: red" th:if="${#fields.hasErrors('description')}">Invalid Description</div>
+            </div>
+            <div>
+                <label>
+                    ONGOING:
+                    <input id="ongoing" th:field=*{status} type="checkbox" value="ONGOING">
+                </label>
+                <label>
+                    FINISHED:
+                    <input id="finished" th:field=*{status} type="checkbox" value="FINISHED">
+                </label>
+            </div>
+            <div>
+                <input type="submit">
+            </div>
+        </form>
+    </body>
+
+</html>
