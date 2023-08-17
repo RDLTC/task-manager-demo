@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMapper {
     
-    public TaskDto taskToDto(Task task){
+    public TaskDto mapToDto(Task task){
         TaskDto taskDto = TaskDto.builder()
                                  .id(task.getId())
                                  .title(task.getTitle())
@@ -19,7 +19,7 @@ public class TaskMapper {
         return taskDto;
     }
     
-    public Task dtoToTask(TaskDto taskDto){
+    public Task mapToTask(TaskDto taskDto){
         Task task = Task.builder()
                         .id(taskDto.getId())
                         .title(taskDto.getTitle())

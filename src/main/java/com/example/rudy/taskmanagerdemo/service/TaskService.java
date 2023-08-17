@@ -1,8 +1,8 @@
 package com.example.rudy.taskmanagerdemo.service;
 
 import com.example.rudy.taskmanagerdemo.domain.Task;
+import com.example.rudy.taskmanagerdemo.domain.User;
 import com.example.rudy.taskmanagerdemo.dto.TaskDto;
-import com.example.rudy.taskmanagerdemo.dto.UserDto;
 import com.example.rudy.taskmanagerdemo.mapper.TaskMapper;
 import com.example.rudy.taskmanagerdemo.mapper.UserMapper;
 import com.example.rudy.taskmanagerdemo.repository.TaskRepository;
@@ -20,10 +20,11 @@ public class TaskService {
     private final UserMapper userMapper;
     
     public void addTask(TaskDto task, String username) throws Exception{
-        UserDto user = userService.findByUsername(username);
-        Task newTask = taskMapper.dtoToTask(task);
+        User user = userMapper.mapToUser(userService.findByUsername(username));
         
-        newTask.setUser(userMapper.dtoToUser(user));
+        Task newTask = taskMapper.mapToTask(task);
+        newTask.setUser(user);
+        
         taskRepository.save(newTask);
     }
 }

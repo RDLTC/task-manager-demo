@@ -29,7 +29,7 @@ public class UserService{
     
     public UserDto findByUsername(String username){
         User user = userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("Username "+username+" not found."));
-        return userMapper.userToDto(user);
+        return userMapper.mapToDto(user);
     }
     
 }
