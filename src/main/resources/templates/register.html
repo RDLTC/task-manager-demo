@@ -7,13 +7,34 @@
     </head>
 
     <body>
-        <form th:action="@{/user/register}" method="post">  
+        <form th:object="${newUser}" th:action="@{/user/register}" method="post">  
             <div th:if="${param.error}">
                 <span>Invalid data input, verify.</span>
             </div>
-            <h1><label>Email: </label> <input type="text" name="email" placeholder="Email"/><br></h1>
-            <h1><label>Username: </label> <input type="text" name="userName" placeholder="Username"/><br></h1>
-            <h1><label>Password: </label> <input type="text" name="password" placeholder="Password"/><br></h1>
+            <div>
+                <h1>
+                    <label>Email: </label> <input id="email" type="text" th:field="*{email}" placeholder="Email"/>
+                </h1>
+                <h4>
+                    <span style="color:red; font-family: Times New Roman" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email</span>
+                </h4>
+            </div>
+            <div>
+                <h1>
+                    <label>Username: </label> <input id="userName" type="text" th:field="*{userName}" placeholder="Username"/>
+                </h1>
+                <h4>
+                    <span style="color:red; font-family: Times New Roman" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Invalid username</span>
+                </h4>
+            </div>
+            <div>
+                <h1>
+                    <label>Password: </label> <input id="password" type="text" th:field="*{password}" placeholder="Password"/>
+                </h1>
+                <h4>
+                    <span style="color:red; font-family: Times New Roman" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid password</span>
+                </h4>
+            </div>
             <button type="submit">Sign In</button>
         </form>
     </body>

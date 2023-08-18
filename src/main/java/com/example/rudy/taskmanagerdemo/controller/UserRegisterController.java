@@ -15,7 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user/register")
 @RequiredArgsConstructor
 public class UserRegisterController {
+    
     private final UserService userService;
+    
+    @ModelAttribute("newUser")
+    public UserDto getNewUser(){
+        return new UserDto();
+    }
     
     @GetMapping
     public String userRegisterPage(){
@@ -23,11 +29,11 @@ public class UserRegisterController {
     }
     
     @PostMapping
-    public String registerUser(@ModelAttribute @Valid UserDto user, Errors errors){
+    public String registerUser(@ModelAttribute("newUser") @Valid UserDto newUser, Errors errors){
         if(errors.hasErrors()){
             return "register";
         }
-        userService.registerUser(user);
+        userService.registerUser(newUser);
         return "redirect:/login";
     }
 }
