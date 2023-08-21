@@ -7,6 +7,7 @@ import com.example.rudy.taskmanagerdemo.mapper.TaskMapper;
 import com.example.rudy.taskmanagerdemo.mapper.UserMapper;
 import com.example.rudy.taskmanagerdemo.repository.TaskRepository;
 import jakarta.transaction.Transactional;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,20 @@ public class TaskService {
         newTask.setUser(user);
         
         taskRepository.save(newTask);
+    }
+    
+    public TaskDto findTaskById(Long taskId){
+        TaskDto task = taskMapper.mapToDto(taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException("Task with id "+taskId+" not found.")));
+        return task;
+    }
+    
+    public void modifyTask(TaskDto modifiedTask, Long taskId){
+        Task taskToUpdate = taskRepository.findById(taskId).orElseThrow(() -> new NoSuchElementException("Task with id "+modifiedTask.getId()+" not found."));
+        
+        taskToUpdate.setTitle(modifiedTask.getTitle());
+        taskToUpdate.setDescription(modifiedTask.getDescription());
+        taskToUpdate.setStatus(modifiedTask.getStatus());
+        
+        taskRepository.save(taskToUpdate);
     }
 }

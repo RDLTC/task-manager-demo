@@ -7,16 +7,17 @@
     </head>
     <body>
         
-        <h1>Tasks:<br></h1>
+        <div><h1>Tasks:</h1></div>
+        
         <div th:each="task : ${tasks}">
             <h2 th:text="${task.title}"></h2>
-            <h3 th:text="${task.description}"></h3>
+            <p th:text="${task.description}"></p>
             <h3 th:text="${task.status}"></h3>
-            <br>
-        </div> 
+            <a th:href="@{/tasks/{username}/modifyTask/{taskId}(username=${username},taskId=${task.id})}">Modify this task</a>
+        </div>
         
         <div>
-            <a th:href="@{/tasks/{username}/addTask(username=${username})}"> <button>Add Task</button> </a>
+            <br><a th:href="@{/tasks/{username}/addTask(username=${username})}"><button>Add Task</button></a>
         </div>
         
         <div>
