@@ -25,18 +25,18 @@
 
             <div>
                 <label for="description">Description:</label>
-                <textarea id="description" th:field="*{description}" rows="4" cols="50"/>
+                <textarea id="description" th:field="*{description}" rows="4" cols="50"></textarea>
             </div>
             <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Invalid Description.</div>
 
             <div>
                 <label>
                     ONGOING:
-                    <input id="ongoing" th:field="*{status}" type="checkbox" value="ONGOING" onclick="toggleCheckboxes('ongoing')">
+                    <input id="ongoing" th:field="*{status}" type="checkbox" value="ONGOING" onclick="toggleCheckboxes('ongoing')"/>
                 </label>
                 <label>
                     FINISHED:
-                    <input id="finished" th:field="*{status}" type="checkbox" value="FINISHED" onclick="toggleCheckboxes('finished')">
+                    <input id="finished" th:field="*{status}" type="checkbox" value="FINISHED" onclick="toggleCheckboxes('finished')"/>
                 </label>
             </div>
             <div style="color: red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Choose an option</div>
@@ -45,5 +45,10 @@
                 <input type="submit">
             </div>
         </form>
+        
+        <div>
+            <br> <a href="/tasks"><- Return</a>
+        </div>
+        
     </body>
 </html>

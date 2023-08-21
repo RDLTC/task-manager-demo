@@ -42,12 +42,28 @@ public class TaskController {
         return "addTask";
     }
     
+    @GetMapping("/{username}/modifyTask/{taskId}")
+    public String modifyTaskPage(@PathVariable String username, @PathVariable Long taskId, Model model){
+        TaskDto task = taskService.findTaskById(taskId);
+        model.addAttribute("modifyTask", task);
+        return "modifyTask";
+    }
+    
     @PostMapping("/addTask")
     public String addTask(Authentication auth, @ModelAttribute("task") @Valid TaskDto task, Errors errors) throws Exception{
         if(errors.hasErrors()){
             return "addTask";
         }
         taskService.addTask(task, auth.getName());
+        return "redirect:/tasks";
+    }
+    
+    @PostMapping("modifyTask/{taskId}")
+    public String modifyTask(@PathVariable Long taskId, @ModelAttribute("modifyTask") @Valid TaskDto modifiedTask, Errors errors){
+        if(errors.hasErrors()){
+            return "modifyTask";
+        }
+        taskService.modifyTask(modifiedTask, taskId);
         return "redirect:/tasks";
     }
 }
