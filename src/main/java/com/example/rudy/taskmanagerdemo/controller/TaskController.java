@@ -49,6 +49,13 @@ public class TaskController {
         return "modifyTask";
     }
     
+    @GetMapping("/{username}/deleteTask/{taskId}")
+    public String deleteTask(@PathVariable String username, @PathVariable Long taskId){
+        TaskDto task = taskService.findTaskById(taskId);
+        taskService.deleteTask(taskId);
+        return "redirect:/tasks";
+    }
+    
     @PostMapping("/addTask")
     public String addTask(Authentication auth, @ModelAttribute("task") @Valid TaskDto task, Errors errors) throws Exception{
         if(errors.hasErrors()){
