@@ -13,7 +13,7 @@
             <h2 th:text="${task.title}"></h2>
             <p th:text="${task.description}"></p>
             <h3 th:text="${task.status}"></h3>
-            <a th:href="@{/tasks/{username}/modifyTask/{taskId}(username=${username},taskId=${task.id})}">Modify this task</a>
+            <a th:href="@{/tasks/{username}/modifyTask/{taskId}(username=${username},taskId=${task.id})}">Modify this task</a> / <a th:href="@{/tasks/{username}/deleteTask/{taskId}(username=${username},taskId=${task.id})}">Delete this task</a>
         </div>
         
         <div>
