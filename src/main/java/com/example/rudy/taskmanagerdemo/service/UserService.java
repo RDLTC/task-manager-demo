@@ -34,4 +34,9 @@ public class UserService{
         return userMapper.mapToDto(user);
     }
     
+    public boolean usernameAlreadyExists(String username){
+        return userRepository.findAll().stream().anyMatch(user -> user.getUsername().equals(username));
+    }
+    
+    
 }
