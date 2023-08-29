@@ -8,15 +8,19 @@ import com.example.rudy.taskmanagerdemo.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class TaskmanagerDemoApplication implements CommandLineRunner {
+    
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public TaskmanagerDemoApplication(UserRepository userRepository, TaskRepository taskRepository) {
+    public TaskmanagerDemoApplication(UserRepository userRepository, TaskRepository taskRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     
     public static void main(String[] args) {
@@ -29,7 +33,7 @@ public class TaskmanagerDemoApplication implements CommandLineRunner {
             User user = User.builder()
                             .email("admin@example.com")
                             .userName("admin")
-                            .password("admin96")
+                            .password(passwordEncoder.encode("admin96"))
                             .rol("ADMIN")
                             .build();
             userRepository.save(user);
