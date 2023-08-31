@@ -1,5 +1,6 @@
 package com.example.rudy.taskmanagerdemo.dto;
 
+import com.example.rudy.taskmanagerdemo.validation.EmailAlreadyExists;
 import com.example.rudy.taskmanagerdemo.validation.UsernameAlreadyExists;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @UsernameAlreadyExists
+@EmailAlreadyExists
 public class UserDto {
     private Long id;
     @Email(message = "Invalid email format.")
