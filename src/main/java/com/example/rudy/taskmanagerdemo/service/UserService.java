@@ -38,5 +38,7 @@ public class UserService{
         return userRepository.findAll().stream().anyMatch(user -> user.getUsername().equals(username));
     }
     
-    
+    public boolean emailAlreadyExists(String email){
+        return userRepository.findByEmail(email).isPresent();
+    }
 }
